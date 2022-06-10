@@ -1,8 +1,8 @@
-﻿int[,] GenerateArray(int colLength, int rowLength, int minBorder = 0, maxBorder = 20)
+﻿int[,] GenerateArray(int colLength, int rowLength, int minBorder = 0, int maxBorder = 20)
 {
     if (minBorder > maxBorder)
     {
-        Console.WriteLine($"Границы егнерации не верны, минимальный больше максимального, minBorder: {minBorder}, maxBorder: {maxBorder}");
+        Console.WriteLine($"Границы генерации не верны, минимальный больше максимального, minBorder: {minBorder}, maxBorder: {maxBorder}");
         int buf = minBorder;
         minBorder = maxBorder;
         maxBorder = buf;
@@ -14,32 +14,42 @@
         {
             generatedArray[i, j] = new Random().Next(minBorder, maxBorder + 1);
         }
-        return generatedArray;
     }
+    return generatedArray;
 }
 
 void PrintHeadOfNumbers(int length, string name = "")
 {
-    if (string.IsNullOrEmpty(name))
+    if (!string.IsNullOrEmpty(name))
     {
-        Console.WriteLine($"--------------{name}--------------")
+        Console.WriteLine($"--------------{name}--------------");
     }
     Console.Write("[ ]\t");
     for (var i = 0; i < length; i++)
     {
-        Console.Write($"[{i}]");
+        Console.Write($"[{i}]\t");
     }
+    Console.WriteLine();
 }
 
-void Print2DArray(int[,] arrayToPrint)
+void Print2DArray(int[,] arrayToPrint, string name = "")
 {
-    PrintHeadOfNumbers(arrayToPrint.GetLength(1));
-    for
+    PrintHeadOfNumbers(arrayToPrint.GetLength(1), name);
+    for (int i = 0; i < arrayToPrint.GetLength(0); i++)
+    {
+        Console.Write($"[{i}]\t");
+        for (int j = 0; j < arrayToPrint.GetLength(1); j++)
+        {
+            Console.Write($"{arrayToPrint[i, j]}\t");
+        }
+        Console.WriteLine();
+    }
 }
 
 void PrintArray(int[] array, string name = "")
 {
     PrintHeadOfNumbers(array.Length, name);
+    Console.Write("[ ]\t");
     for (int i = 0; i < array.Length; i++)
     {
         Console.Write($"{array[i]}\t");
